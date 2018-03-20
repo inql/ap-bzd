@@ -1,2 +1,2 @@
 # ap-bzd
-Collage projects
+College projects
