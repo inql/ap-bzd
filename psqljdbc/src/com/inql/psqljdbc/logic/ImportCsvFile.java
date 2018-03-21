@@ -1,5 +1,7 @@
 package com.inql.psqljdbc.logic;
 
+import com.inql.psqljdbc.model.Data;
+
 import java.io.*;
 import java.util.*;
 
@@ -15,17 +17,18 @@ public class ImportCsvFile {
         this.csvFile = csvFile;
     }
 
-    public ArrayList<List<String>> getDataFromCsvFile(){
-        ArrayList<List<String>> dataSet = new ArrayList<>();
+    public Data getDataFromCsvFile(){
+        Data data = new Data();
         try{
             bufferedReader = new BufferedReader(new FileReader(csvFile));
 
             //first line - column names
             line = bufferedReader.readLine();
-            dataSet.add(Arrays.asList(line.split(csvSplitBy)));
+            data.setColumnNames(Arrays.asList(line.split(csvSplitBy)));
             //data
+            data.setValues(new ArrayList<>());
             while((line=bufferedReader.readLine())!=null){
-                dataSet.add(Arrays.asList(line.split(csvSplitBy)));
+                data.getValues().add(Arrays.asList(line.split(csvSplitBy)));
             }
 
         }catch (FileNotFoundException e){
@@ -41,7 +44,7 @@ public class ImportCsvFile {
                 }
             }
         }
-        return dataSet;
+        return data;
     }
 
 
