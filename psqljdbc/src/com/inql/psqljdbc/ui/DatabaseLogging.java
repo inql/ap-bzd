@@ -9,10 +9,10 @@ public class DatabaseLogging {
 
     private Connection connection;
     private final Console console = System.console();
-    private String dbUrl;
-    private String dbName;
-    private String dbUsername;
-    private String dbPassword;
+    private String dbUrl = "192.168.56.102";
+    private String dbName = "dbinkus";
+    private String dbUsername = "dbinkus";
+    private String dbPassword = "!QAZ2wsx";
     private Scanner scanner;
 
     public DatabaseLogging() {
@@ -39,8 +39,9 @@ public class DatabaseLogging {
         dbName=scanner.next();
         System.out.print("\nEnter username: ");
         dbUsername=scanner.next();
-        dbPassword = new String(console.readPassword("\nEnter password: "));
-
+//        dbPassword = new String(console.readPassword("\nEnter password: "));
+        System.out.println("\nEnter password");
+        dbPassword=scanner.next();
     }
 
     private void useSavedSettings(){

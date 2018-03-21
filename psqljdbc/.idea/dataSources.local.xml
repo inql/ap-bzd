@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="dbinkus@192.168.56.102" uuid="9e1c7088-a51b-40dc-9af9-7fed2a24770c">
+      <database-info product="PostgreSQL" version="9.6.7" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.1">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>dbinkus</user-name>
+      <introspection-schemas>dbinkus:public</introspection-schemas>
+    </data-source>
+  </component>
+</project>

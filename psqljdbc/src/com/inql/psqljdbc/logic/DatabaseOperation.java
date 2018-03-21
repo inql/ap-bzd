@@ -42,34 +42,49 @@ public class DatabaseOperation {
     }
 
     public void insertInto(){
-        Statement statement = connection.createStatement();
         try {
+            Statement statement = connection.createStatement();
             ResultSet tableResultSet = statement.executeQuery("SELECT * FROM "+tableName);
             ResultSetMetaData tableResultSetMetaData = tableResultSet.getMetaData();
             StringBuilder sqlStatement = new StringBuilder();
+            StringBuilder sqlStatementTemplate = new StringBuilder();
             sqlStatement.append("INSERT INTO ").append(tableName).append(" (");
-            for(int i =1; i<=tableResultSetMetaData.getColumnCount(); i++){
+            sqlStatementTemplate.append("(");
+            for(int i =2; i<=tableResultSetMetaData.getColumnCount(); i++){
                 sqlStatement.append(tableResultSetMetaData.getColumnName(i));
-                if(i<tableResultSetMetaData.getColumnCount())
+                sqlStatementTemplate.append("?");
+                if(i<tableResultSetMetaData.getColumnCount()){
                     sqlStatement.append(", ");
-            }
-            sqlStatement.append(") VALUES");
-            for(List<String> values : data.getValues()){
-                sqlStatement.append("\n(");
-                for(int i =0; i<tableResultSetMetaData.getColumnCount(); i++){
-                    if(i<values.size()){
-                        if(values.get(i).equals(""))
-                            sqlStatement.append("null");
-                        else
-                            sqlStatement.append(values.get(i));
-                    }
-                    else sqlStatement.append("null");
-                    if(i<tableResultSetMetaData.getColumnCount()-1)
-                        sqlStatement.append(", ");
+                    sqlStatementTemplate.append(", ");
                 }
-                sqlStatement.append(")");
             }
-            statement.execute(sqlStatement.toString());
+            sqlStatement.append(") VALUES ");
+            sqlStatementTemplate.append(")");
+            StringBuilder preAlterTableStringBuilder = new StringBuilder().append("ALTER TABLE ").append(tableName).append(" ALTER COLUMN ");
+            Statement alterTableStatement = connection.createStatement();
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement.append(sqlStatementTemplate).toString());
+            for(Iterator<List<String>> i = data.getValues().listIterator(); i.hasNext();){
+                List<String> values = i.next();
+                Iterator<String> valueIterator = values.listIterator();
+                for(int j =1; j<=preparedStatement.getParameterMetaData().getParameterCount(); j++){
+                    if(valueIterator.hasNext()){
+                        String value = valueIterator.next();
+                            if(tableResultSetMetaData.getColumnDisplaySize(j+1)<value.length()){
+                                StringBuilder alterTable = new StringBuilder().append(preAlterTableStringBuilder).append(tableResultSetMetaData.getColumnName(j+1)).append(" TYPE VARCHAR(").append(value.length()).append(")");
+                                alterTableStatement.execute(alterTable.toString());
+                                tableResultSetMetaData = statement.executeQuery("SELECT * FROM "+tableName).getMetaData();
+                            }
+                            if(value.equals(""))
+                                preparedStatement.setString(j,"null");
+                            else
+                                preparedStatement.setString(j,value);
+                        }
+                    else preparedStatement.setString(j,"null");
+                }
+                preparedStatement.addBatch();
+                preparedStatement.clearParameters();
+            }
+            preparedStatement.executeBatch();
             connection.commit();
             connection.close();
         } catch (SQLException e) {
