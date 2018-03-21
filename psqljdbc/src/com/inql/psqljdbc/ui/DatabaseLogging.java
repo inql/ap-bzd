@@ -19,7 +19,7 @@ public class DatabaseLogging {
         this.scanner = new Scanner(System.in);
     }
 
-    public void connectToDatabase(){
+    public Connection connectToDatabase(){
         System.out.println("Do you like to change default settings?\n\t(Y/N)");
         if(scanner.next().toLowerCase().equals("y")){
             //todo change settings
@@ -29,7 +29,7 @@ public class DatabaseLogging {
             //todo use saved settings
             useSavedSettings();
         }
-        connect();
+        return connect();
     }
 
     private void insertNewSettings(){
@@ -47,7 +47,7 @@ public class DatabaseLogging {
 
     }
 
-    private void connect(){
+    private Connection connect(){
         try {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager
@@ -59,6 +59,7 @@ public class DatabaseLogging {
             System.exit(0);
         }
         System.out.println("Opened database successfully");
+        return connection;
     }
 
 
