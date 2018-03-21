@@ -28,10 +28,11 @@ public class DatabaseOperation {
         statement.addBatch(sqlStatement.toString());
         sqlStatement = new StringBuilder();
         sqlStatement.append("CREATE TABLE ").append(tableName)
-                .append(" (ID SERIAL PRIMARY KEY,");
+                .append(" (ID SERIAL PRIMARY KEY");
         Iterator iterator = data.get(0).listIterator();
         while(iterator.hasNext()){
-            sqlStatement.append(iterator.next()).append(" VARCHAR(20),");
+            sqlStatement.append(",");
+            sqlStatement.append(iterator.next()).append(" VARCHAR(20)");
         }
         sqlStatement.append(")");
         statement.addBatch(sqlStatement.toString());
