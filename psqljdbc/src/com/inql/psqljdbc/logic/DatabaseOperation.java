@@ -38,6 +38,7 @@ public class DatabaseOperation {
         statement.addBatch(sqlStatement.toString());
         statement.executeBatch();
         connection.commit();
+        insertInto();
     }
 
     public void insertInto(){
@@ -69,6 +70,8 @@ public class DatabaseOperation {
                 sqlStatement.append(")");
             }
             statement.execute(sqlStatement.toString());
+            connection.commit();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

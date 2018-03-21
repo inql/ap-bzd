@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed2b853e-9e19-480e-b537-7ce0e6e64253" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/inql/psqljdbc/model/Data.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/com/inql/psqljdbc/logic/DatabaseOperation.java" afterPath="$PROJECT_DIR$/src/com/inql/psqljdbc/logic/DatabaseOperation.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/inql/psqljdbc/logic/ImportCsvFile.java" afterPath="$PROJECT_DIR$/src/com/inql/psqljdbc/logic/ImportCsvFile.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -77,11 +75,11 @@
       <file leaf-file-name="DatabaseOperation.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/inql/psqljdbc/logic/DatabaseOperation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="55" column="35" lean-forward="false" selection-start-line="55" selection-start-column="35" selection-end-line="55" selection-end-column="35" />
+            <state relative-caret-position="260">
+              <caret line="40" column="21" lean-forward="true" selection-start-line="40" selection-start-column="21" selection-end-line="40" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1521650323999" expanded="true" signature="1565:1579" ph="SELECT * FRO... missingValue" />
+                <marker date="1521650396049" expanded="true" signature="1587:1601" ph="SELECT * FRO... missingValue" />
               </folding>
             </state>
           </provider>
@@ -340,12 +338,12 @@
       <workItem from="1521624347498" duration="41000" />
       <workItem from="1521625099208" duration="2057000" />
       <workItem from="1521627184953" duration="7000" />
-      <workItem from="1521633718817" duration="10310000" />
+      <workItem from="1521633718817" duration="10369000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18110000" />
+    <option name="totallyTimeSpent" value="18169000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1372" y="-15" width="949" height="1069" extended-state="6" />
@@ -591,11 +589,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/inql/psqljdbc/logic/DatabaseOperation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="55" column="35" lean-forward="false" selection-start-line="55" selection-start-column="35" selection-end-line="55" selection-end-column="35" />
+        <state relative-caret-position="260">
+          <caret line="40" column="21" lean-forward="true" selection-start-line="40" selection-start-column="21" selection-end-line="40" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1521650323999" expanded="true" signature="1565:1579" ph="SELECT * FRO... missingValue" />
+            <marker date="1521650396049" expanded="true" signature="1587:1601" ph="SELECT * FRO... missingValue" />
           </folding>
         </state>
       </provider>
