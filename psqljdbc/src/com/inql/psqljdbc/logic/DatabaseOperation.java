@@ -3,10 +3,8 @@ package com.inql.psqljdbc.logic;
 import com.inql.psqljdbc.model.Data;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 public class DatabaseOperation {
 
@@ -38,41 +36,22 @@ public class DatabaseOperation {
         statement.addBatch(sqlStatement.toString());
         statement.executeBatch();
         connection.commit();
-        insertInto();
     }
 
-    public void insertInto(){
-        try {
+    public void insertInto() throws SQLException {
             Statement statement = connection.createStatement();
             ResultSet tableResultSet = statement.executeQuery("SELECT * FROM "+tableName);
             ResultSetMetaData tableResultSetMetaData = tableResultSet.getMetaData();
-            StringBuilder sqlStatement = new StringBuilder();
-            StringBuilder sqlStatementTemplate = new StringBuilder();
-            sqlStatement.append("INSERT INTO ").append(tableName).append(" (");
-            sqlStatementTemplate.append("(");
-            for(int i =2; i<=tableResultSetMetaData.getColumnCount(); i++){
-                sqlStatement.append(tableResultSetMetaData.getColumnName(i));
-                sqlStatementTemplate.append("?");
-                if(i<tableResultSetMetaData.getColumnCount()){
-                    sqlStatement.append(", ");
-                    sqlStatementTemplate.append(", ");
-                }
-            }
-            sqlStatement.append(") VALUES ");
-            sqlStatementTemplate.append(")");
-            StringBuilder preAlterTableStringBuilder = new StringBuilder().append("ALTER TABLE ").append(tableName).append(" ALTER COLUMN ");
-            Statement alterTableStatement = connection.createStatement();
-            PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement.append(sqlStatementTemplate).toString());
+            //generate statement for insertion
+            PreparedStatement preparedStatement = generateInsertionQuery(statement);
             for(Iterator<List<String>> i = data.getValues().listIterator(); i.hasNext();){
                 List<String> values = i.next();
                 Iterator<String> valueIterator = values.listIterator();
                 for(int j =1; j<=preparedStatement.getParameterMetaData().getParameterCount(); j++){
                     if(valueIterator.hasNext()){
                         String value = valueIterator.next();
-                            if(tableResultSetMetaData.getColumnDisplaySize(j+1)<value.length()){
-                                StringBuilder alterTable = new StringBuilder().append(preAlterTableStringBuilder).append(tableResultSetMetaData.getColumnName(j+1)).append(" TYPE VARCHAR(").append(value.length()).append(")");
-                                alterTableStatement.execute(alterTable.toString());
-                                tableResultSetMetaData = statement.executeQuery("SELECT * FROM "+tableName).getMetaData();
+                            if(isColumnDisplaySizeCorrect(j+1,tableResultSetMetaData,value)){
+                                tableResultSetMetaData = alterColumn(j+1, value.length(), tableResultSetMetaData);
                             }
                             if(value.equals(""))
                                 preparedStatement.setString(j,"null");
@@ -86,10 +65,40 @@ public class DatabaseOperation {
             }
             preparedStatement.executeBatch();
             connection.commit();
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
+    }
+
+    private PreparedStatement generateInsertionQuery(Statement statement) throws SQLException{
+        ResultSet tableResultSet = statement.executeQuery("SELECT * FROM "+tableName);
+        ResultSetMetaData tableResultSetMetaData = tableResultSet.getMetaData();
+
+        StringBuilder sqlStatement = new StringBuilder();
+        StringBuilder sqlStatementTemplate = new StringBuilder();
+
+        sqlStatement.append("INSERT INTO ").append(tableName).append(" (");
+        sqlStatementTemplate.append("(");
+        for(int i =2; i<=tableResultSetMetaData.getColumnCount(); i++){
+            sqlStatement.append(tableResultSetMetaData.getColumnName(i));
+            sqlStatementTemplate.append("?");
+            if(i<tableResultSetMetaData.getColumnCount()){
+                sqlStatement.append(", ");
+                sqlStatementTemplate.append(", ");
+            }
+        }
+        sqlStatement.append(") VALUES ");
+        sqlStatementTemplate.append(")");
+
+        return connection.prepareStatement(sqlStatement.append(sqlStatementTemplate).toString());
+    }
+
+    private boolean isColumnDisplaySizeCorrect(int columnIndex, ResultSetMetaData resultSetMetaData, String value) throws SQLException{
+        return resultSetMetaData.getColumnDisplaySize(columnIndex)<value.length();
+    }
+
+    private ResultSetMetaData alterColumn(int columnIndex, int newColumnDisplaySize, ResultSetMetaData resultSetMetaData) throws SQLException{
+        Statement alterColumn = connection.createStatement();
+        StringBuilder alterColumnStatement = new StringBuilder().append("ALTER TABLE ").append(tableName).append(" ALTER COLUMN ").append(resultSetMetaData.getColumnName(columnIndex)).append(" TYPE VARCHAR(").append(newColumnDisplaySize).append(")");
+        alterColumn.execute(alterColumnStatement.toString());
+        return connection.createStatement().executeQuery("SELECT * FROM "+tableName).getMetaData();
     }
 }

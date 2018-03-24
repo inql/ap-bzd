@@ -30,6 +30,7 @@ public class ImportCsvFile {
             while((line=bufferedReader.readLine())!=null){
                 data.getValues().add(Arrays.asList(line.split(csvSplitBy)));
             }
+            bufferedReader.close();
 
         }catch (FileNotFoundException e){
             e.printStackTrace();
