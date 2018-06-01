@@ -10,19 +10,21 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "kategoria")
-public class Category {
+@Table(name = "podkategoria")
+public class Subcategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "nazwa")
     private String name;
-    @Column(name ="opis", columnDefinition = "TEXT")
+    @Column(name = "opis", columnDefinition = "TEXT")
     private String description;
-
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private Set<Subcategory> subcategories = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "kategoria_id")
+    private Category category;
+    @OneToMany(mappedBy = "subcategory", cascade = CascadeType.ALL)
+    private Set<Product> products = new HashSet<>();
 
     @Override
     public String toString() {
