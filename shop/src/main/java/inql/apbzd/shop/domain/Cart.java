@@ -10,15 +10,16 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "koszyk")
+@IdClass(CardId.class)
 public class Cart {
 
-    @ManyToOne
+    @Id @ManyToOne
     @JoinColumn(name = "zamowienie_id")
-    private Order order;
+    Order order;
 
-    @ManyToOne
+    @Id @ManyToOne
     @JoinColumn(name = "produkt_id")
-    private Product product;
+    Product product;
 
     @Column(name = "ilosc")
     private int quantity;
