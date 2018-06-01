@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,6 +22,7 @@ public class Role {
     @Column(name = "nazwa")
     private String name;
     @Column(name = "opis", columnDefinition = "TEXT")
+    @NotNull
     private String description;
 
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)

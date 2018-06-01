@@ -30,8 +30,8 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="index">Home</a></li>
-                <li><a href="users_overview">Użytkownicy</a></li>
                 <li><a href="roles_overview">Role</a></li>
+                <li><a href="#">Gallery</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -48,19 +48,18 @@
             <div class="panel panel-primary">
 
                 <div class="panel-heading">
-                    <h1 class="panel-title">My Recipes!</h1>
+                    <h1 class="panel-title">Użytkownicy</h1>
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive" th:if="${not #lists.isEmpty(users)}">
                         <table class="table table-hover ">
                             <thead class="thead-inverse">
                             <tr>
-                                <th>ID</th>
-                                <th>Description</th>
-                                <th>View</th>
-                                <th>Update</th>
-                                <th>Delete</th>
-                                <th>xD</th>
+                                <th>Login</th>
+                                <th>Imie</th>
+                                <th>Nazwisko</th>
+                                <th>Rola</th>
+                                <th>Adres</th>
                             </tr>
                             </thead>
                             <tr th:remove="all">
@@ -74,15 +73,20 @@
                                 <td><a href="#">View</a></td>
                             </tr>
                             <tr th:each="user : ${users}">
-                                <td th:text="${user.id}">334</td>
-                                <td th:text="${user.login}">Tasty Goodnees 3</td>
-                                <td th:text="${user.name}">lol</td>
+                                <td th:text="${user.login}">lol</td>
+                                <td th:text="${user.name}">Tasty Goodnees 3</td>
                                 <td th:text="${user.surname}">lol</td>
-                                <td th:text="${user.role.toString()}">lol</td>
-                                <td th:text="${user.address.toString()}">lol</td>
+                                <td th:text="${user.role}">lol</td>
+                                <td th:text="${user.address}">lol</td>
+                                <td><a href="#" th:href="@{'/users/'+${user.id}+'/update'}">Edytuj</a> </td>
+                                <td><a href="#" th:href="@{'/users/'+${user.id}+'/delete'}">Usuń</a> </td>
                             </tr>
                         </table>
                     </div>
+                </div>
+                <div class="panel-footer">
+                    <a class="btn btn-default" href="#"
+                       th:href="@{'/roles/new'}" role="button">Nowy</a>
                 </div>
             </div>
         </div>

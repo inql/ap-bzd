@@ -28,12 +28,8 @@ public class Address {
 
     @Override
     public String toString() {
-        return "Address{" +
-                "streetName='" + streetName + '\'' +
-                ", hoNumber='" + hoNumber + '\'' +
-                ", apaNumber='" + apaNumber + '\'' +
-                ", postalCode='" + postalCode + '\'' +
-                ", city='" + city + '\'' +
-                '}';
+        return streetName + " "+hoNumber+"/"+apaNumber+"\n" +
+                postalCode+"\n" +
+                city;
     }
 }
