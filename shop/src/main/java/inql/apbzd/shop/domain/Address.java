@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class Address {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "ulica")
@@ -26,5 +26,14 @@ public class Address {
     @Column(name = "miasto")
     private String city;
 
-
+    @Override
+    public String toString() {
+        return "Address{" +
+                "streetName='" + streetName + '\'' +
+                ", hoNumber='" + hoNumber + '\'' +
+                ", apaNumber='" + apaNumber + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", city='" + city + '\'' +
+                '}';
+    }
 }

@@ -8,10 +8,11 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
+@Table(name = "kategoria")
 public class Category {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "nazwa")
     private String name;

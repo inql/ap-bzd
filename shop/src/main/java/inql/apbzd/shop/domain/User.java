@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String login;
@@ -28,6 +28,10 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "rola_id")
     private Role role;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "adres_id")
+    private Address address;
 
 
 }
