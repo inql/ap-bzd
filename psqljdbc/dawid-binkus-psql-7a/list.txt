@@ -1,0 +1,39 @@
+su root
+pico /ect/apt/sources.list
+deb http://deb.debian.org/debian stretch main
+deb-src gttp://deb.debian.org/debian stretch main
+
+apt-get update
+apt-get install postgresql
+adduser dbinkus
+su postgres
+createuser -S -d –R dbinkus
+
+su dbinkus
+cd
+createdb
+psql
+alter user dbuser with password 'dbuser';
+\q
+
+su root
+
+apt-get install openjdk-8-jre
+apt-get update
+apt-get install default-jre
+apt-get install software-properties-common
+add-apt-repository "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main"
+apt-get update
+apt-get install oracle-java8-installer
+
+mkdir -p project/jars
+cd project/jars
+wget https://jdbc.postgresql.org/download/postgresql-42.2.2.jar
+(current user)
+pico /root/.bashrc
+albo
+(global)
+/etc/bash.bashrc
+dopisz
+
+CLASSPATH="$CLASSPATH:/home/dbinkus/project/jars:/home/dbinkus/project/jars/postgresql-42.2.2.jar"
