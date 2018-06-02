@@ -2,6 +2,7 @@ package inql.apbzd.shop.controllers;
 
 
 import inql.apbzd.shop.commands.UserCommand;
+import inql.apbzd.shop.domain.User;
 import inql.apbzd.shop.services.AddressService;
 import inql.apbzd.shop.services.RoleService;
 import inql.apbzd.shop.services.UserService;
@@ -63,11 +64,13 @@ public class UserController {
 
     }
 
-    @GetMapping("user/{id}/delete")
+    @GetMapping("users/{id}/delete")
     public String deleteById(@PathVariable String id){
         log.debug("Deleting id: "+id);
 
+        Long addressId = userService.findById(Long.valueOf(id)).getAddress().getId();
         userService.deleteById(Long.valueOf(id));
+        addressService.deleteById(addressId);
         return "redirect:/";
     }
 }
