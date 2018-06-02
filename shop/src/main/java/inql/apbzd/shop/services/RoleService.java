@@ -8,6 +8,7 @@ import java.util.Set;
 public interface RoleService {
 
     Set<Role> getRoles();
+    Set<RoleCommand> getRoleCommands();
     Role findById(Long l);
     RoleCommand findCommandById(Long l);
     RoleCommand saveRoleCommand(RoleCommand addressCommand);

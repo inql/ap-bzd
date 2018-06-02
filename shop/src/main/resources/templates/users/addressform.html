@@ -40,11 +40,12 @@
         </div>
     </div>
 </nav>
-<!--/*@thymesVar id="user" type="ginql.apbzd.shop.domain.User"*/-->
+<!--/*@thymesVar id="address" type="inql.apbzd.shop.domain.Address"*/-->
+<!--/*@thymesVar id="roles" type="java.util.List"*/-->
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <form th:object="${role}" th:action="@{/roles/}" method="post">
+            <form th:object="${address}" th:action="@{/users/}" method="post">
 
                 <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
                     <p>Proszę wypełnij poniższe pola:</p>
@@ -58,68 +59,56 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-md-12 form-group" th:class="${#fields.hasErrors('login')}
+                                <div class="col-md-12 form-group" th:class="${#fields.hasErrors('streetName')}
                                 ? 'col-md-12 form-group has-error' : 'col-md-12 form-group'">
-                                    <label>Login:</label>
-                                    <input type="text" class="form-control" th:field="*{login}" th:errorclass="has-error"/>
-                                    <span class="help-block" th:if="${#fields.hasErrors('login')}">
+                                    <label>streetName:</label>
+                                    <input type="text" class="form-control" th:field="*{streetName}" th:errorclass="has-error"/>
+                                    <span class="help-block" th:if="${#fields.hasErrors('streetName')}">
                                         <ul>
-                                            <li th:each="err : ${#fields.errors('login')}" th:text="${err}"/>
+                                            <li th:each="err : ${#fields.errors('streetName')}" th:text="${err}"/>
                                         </ul>
                                     </span>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12 form-group" th:class="${#fields.hasErrors('password')}
+                                <div class="col-md-12 form-group" th:class="${#fields.hasErrors('hoNumber')}
                                 ? 'col-md-12 form-group has-error' : 'col-md-12 form-group'">
-                                    <label>Hasło:</label>
-                                    <input type="password" class="form-control" th:field="*{password}" th:errorclass="has-error"/>
-                                    <span class="help-block" th:if="${#fields.hasErrors('password')}">
+                                    <label>hoNumber:</label>
+                                    <input type="text" class="form-control" th:field="*{hoNumber}" th:errorclass="has-error"/>
+                                    <span class="help-block" th:if="${#fields.hasErrors('hoNumber')}">
                                         <ul>
-                                            <li th:each="err : ${#fields.errors('password')}" th:text="${err}"/>
+                                            <li th:each="err : ${#fields.errors('hoNumber')}" th:text="${err}"/>
                                         </ul>
                                     </span>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12 form-group" th:class="${#fields.hasErrors('name')}
+                                <div class="col-md-12 form-group" th:class="${#fields.hasErrors('apaNumber')}
                                 ? 'col-md-12 form-group has-error' : 'col-md-12 form-group'">
-                                    <label>Imię:</label>
-                                    <input type="text" class="form-control" th:field="*{name}" th:errorclass="has-error"/>
-                                    <span class="help-block" th:if="${#fields.hasErrors('name')}">
+                                    <label>apaNumber:</label>
+                                    <input type="text" class="form-control" th:field="*{apaNumber}" th:errorclass="has-error"/>
+                                    <span class="help-block" th:if="${#fields.hasErrors('apaNumber')}">
                                         <ul>
-                                            <li th:each="err : ${#fields.errors('name')}" th:text="${err}"/>
+                                            <li th:each="err : ${#fields.errors('apaNumber')}" th:text="${err}"/>
                                         </ul>
                                     </span>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12 form-group" th:class="${#fields.hasErrors('surname')}
+                                <div class="col-md-12 form-group" th:class="${#fields.hasErrors('postalCode')}
                                 ? 'col-md-12 form-group has-error' : 'col-md-12 form-group'">
-                                    <label>Hasło:</label>
-                                    <input type="text" class="form-control" th:field="*{surname}" th:errorclass="has-error"/>
-                                    <span class="help-block" th:if="${#fields.hasErrors('surname')}">
+                                    <label>postalCode:</label>
+                                    <input type="text" class="form-control" th:field="*{postalCode}" th:errorclass="has-error"/>
+                                    <span class="help-block" th:if="${#fields.hasErrors('postalCode')}">
                                         <ul>
-                                            <li th:each="err : ${#fields.errors('surname')}" th:text="${err}"/>
+                                            <li th:each="err : ${#fields.errors('postalCode')}" th:text="${err}"/>
                                         </ul>
                                     </span>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12 form-group" th:class="${#fields.hasErrors('surname')}
-                                ? 'col-md-12 form-group has-error' : 'col-md-12 form-group'">
-                                    <label>Hasło:</label>
-                                    <input type="text" class="form-control" th:field="*{surname}" th:errorclass="has-error"/>
-                                    <span class="help-block" th:if="${#fields.hasErrors('surname')}">
-                                        <ul>
-                                            <li th:each="err : ${#fields.errors('surname')}" th:text="${err}"/>
-                                        </ul>
-                                    </span>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Wyślij</button>
                         </div>
                     </div>
+                    <button type="submit" class="btn btn-primary">Wyślij</button>
                 </div>
         </div>
     </div>

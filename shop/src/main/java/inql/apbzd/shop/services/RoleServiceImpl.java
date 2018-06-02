@@ -1,6 +1,5 @@
 package inql.apbzd.shop.services;
 
-import inql.apbzd.shop.commands.AddressCommand;
 import inql.apbzd.shop.commands.RoleCommand;
 import inql.apbzd.shop.converters.RoleCommandToRole;
 import inql.apbzd.shop.converters.RoleToRoleCommand;
@@ -34,6 +33,13 @@ public class RoleServiceImpl implements RoleService {
         Set<Role> roleSet = new HashSet<>();
         roleRepository.findAll().iterator().forEachRemaining(roleSet::add);
         return roleSet;
+    }
+
+    @Override
+    public Set<RoleCommand> getRoleCommands(){
+        Set<RoleCommand> roleCommandSet = new HashSet<>();
+        getRoles().iterator().forEachRemaining(role -> roleCommandSet.add(roleToRoleCommand.convert(role)));
+        return roleCommandSet;
     }
 
     @Override

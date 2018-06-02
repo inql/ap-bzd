@@ -1,8 +1,6 @@
 package inql.apbzd.shop.converters;
 
-import inql.apbzd.shop.commands.AddressCommand;
 import inql.apbzd.shop.commands.RoleCommand;
-import inql.apbzd.shop.domain.Address;
 import inql.apbzd.shop.domain.Role;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;

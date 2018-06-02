@@ -25,6 +25,9 @@ public class User {
     @Column(name = "nazwisko")
     private String surname;
 
+    @Column(name = "email")
+    private String email;
+
     @ManyToOne
     @JoinColumn(name = "rola_id")
     private Role role;

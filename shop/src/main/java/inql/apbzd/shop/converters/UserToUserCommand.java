@@ -11,11 +11,9 @@ import org.springframework.stereotype.Component;
 public class UserToUserCommand implements Converter<User, UserCommand> {
 
     private final RoleToRoleCommand roleConverter;
-    private final AddressToAddressCommand addressConverter;
 
-    public UserToUserCommand(RoleToRoleCommand roleConverter, AddressToAddressCommand addressConverter) {
+    public UserToUserCommand(RoleToRoleCommand roleConverter) {
         this.roleConverter = roleConverter;
-        this.addressConverter = addressConverter;
     }
 
     @Synchronized
@@ -32,8 +30,14 @@ public class UserToUserCommand implements Converter<User, UserCommand> {
         userCommand.setPassword(user.getPassword());
         userCommand.setName(user.getName());
         userCommand.setSurname(user.getSurname());
-        userCommand.setAddress(addressConverter.convert(user.getAddress()));
-        userCommand.setRole(roleConverter.convert(user.getRole()));
+        userCommand.setEmail(user.getEmail());
+        userCommand.setAddressId(user.getAddress().getId());
+        userCommand.setStreetName(user.getAddress().getStreetName());
+        userCommand.setApaNumber(user.getAddress().getApaNumber());
+        userCommand.setHoNumber(user.getAddress().getHoNumber());
+        userCommand.setCity(user.getAddress().getCity());
+        userCommand.setPostalCode(user.getAddress().getPostalCode());
+        userCommand.setRole(roleConverter.convert(user.getRole()).getId());
         return userCommand;
     }
 }

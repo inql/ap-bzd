@@ -40,27 +40,25 @@
         </div>
     </div>
 </nav>
-<!--/*@thymesVar id="users" type="java.util.List"*/-->
-<!--/*@thymesVar id="user" type="inql.apbzd.shop.domain.User"*/-->
+<!--/*@thymesVar id="categories" type="java.util.List"*/-->
+<!--/*@thymesVar id="category" type="inql.apbzd.shop.domain.Category"*/-->
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-primary">
 
                 <div class="panel-heading">
-                    <h1 class="panel-title">Użytkownicy</h1>
+                    <h1 class="panel-title">Role</h1>
                 </div>
                 <div class="panel-body">
-                    <div class="table-responsive" th:if="${not #lists.isEmpty(users)}">
+                    <div class="table-responsive" th:if="${not #lists.isEmpty(categories)}">
                         <table class="table table-hover ">
                             <thead class="thead-inverse">
                             <tr>
-                                <th>Login</th>
-                                <th>Imie</th>
-                                <th>Nazwisko</th>
-                                <th>Rola</th>
-                                <th>Adres</th>
-                                <th>E-mail</th>
+                                <th>Nazwa</th>
+                                <th>Opis</th>
+                                <th>Edytuj</th>
+                                <th>Usuń</th>
                             </tr>
                             </thead>
                             <tr th:remove="all">
@@ -73,22 +71,18 @@
                                 <td>Tasty Goodnees 2</td>
                                 <td><a href="#">View</a></td>
                             </tr>
-                            <tr th:each="user : ${users}">
-                                <td th:text="${user.login}">lol</td>
-                                <td th:text="${user.name}">Tasty Goodnees 3</td>
-                                <td th:text="${user.surname}">lol</td>
-                                <td th:text="${user.role}">lol</td>
-                                <td th:text="${user.address}">lol</td>
-                                <td th:text="${user.email}">lol</td>
-                                <td><a href="#" th:href="@{'/users/'+${user.id}+'/update'}">Edytuj</a> </td>
-                                <td><a href="#" th:href="@{'/users/'+${user.id}+'/delete'}">Usuń</a> </td>
+                            <tr th:each="category : ${categories}">
+                                <td th:text="${category.name}">Tasty Goodnees 3</td>
+                                <td th:text="${category.description}">lol</td>
+                                <td><a href="#" th:href="@{'/categories/'+${category.id}+'/update'}">Edytuj</a> </td>
+                                <td><a href="#" th:href="@{'/categories/'+${category.id}+'/delete'}">Usuń</a> </td>
                             </tr>
                         </table>
                     </div>
                 </div>
                 <div class="panel-footer">
                     <a class="btn btn-default" href="#"
-                       th:href="@{'/users/new'}" role="button">Nowy</a>
+                       th:href="@{'/roles/new'}" role="button">Nowy</a>
                 </div>
             </div>
         </div>

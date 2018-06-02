@@ -1,7 +1,10 @@
 package inql.apbzd.shop.converters;
 
 import inql.apbzd.shop.commands.UserCommand;
+import inql.apbzd.shop.domain.Address;
 import inql.apbzd.shop.domain.User;
+import inql.apbzd.shop.services.AddressService;
+import inql.apbzd.shop.services.RoleService;
 import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
@@ -11,11 +14,13 @@ import org.springframework.stereotype.Component;
 public class UserCommandToUser implements Converter<UserCommand, User> {
 
     private final RoleCommandToRole roleConverter;
-    private final AddressCommandToAddress addressConverter;
+    private final RoleService roleService;
+    private final AddressService addressService;
 
-    public UserCommandToUser(RoleCommandToRole roleConverter, AddressCommandToAddress addressConverter) {
+    public UserCommandToUser(RoleCommandToRole roleConverter, RoleService roleService, AddressService addressService) {
         this.roleConverter = roleConverter;
-        this.addressConverter = addressConverter;
+        this.roleService = roleService;
+        this.addressService = addressService;
     }
 
     @Synchronized
@@ -32,8 +37,22 @@ public class UserCommandToUser implements Converter<UserCommand, User> {
         user.setPassword(userCommand.getPassword());
         user.setName(userCommand.getName());
         user.setSurname(userCommand.getSurname());
-        user.setAddress(addressConverter.convert(userCommand.getAddress()));
-        user.setRole(roleConverter.convert(userCommand.getRole()));
+        user.setEmail(userCommand.getEmail());
+        Address address;
+        if(userCommand.getAddressId()==null){
+            address = new Address();
+        }else{
+            address = addressService.findById(userCommand.getAddressId());
+        }
+
+        address.setStreetName(userCommand.getStreetName());
+        address.setPostalCode(userCommand.getPostalCode());
+        address.setCity(userCommand.getCity());
+        address.setHoNumber(userCommand.getHoNumber());
+        address.setApaNumber(userCommand.getApaNumber());
+
+        user.setAddress(address);
+        user.setRole(roleConverter.convert(roleService.findCommandById(userCommand.getRole())));
         return user;
     }
 }

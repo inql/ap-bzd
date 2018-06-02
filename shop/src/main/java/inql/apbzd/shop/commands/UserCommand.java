@@ -1,14 +1,12 @@
 package inql.apbzd.shop.commands;
 
-import inql.apbzd.shop.domain.Address;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -33,8 +31,26 @@ public class UserCommand {
     @NotBlank(message = "Pole nie może być puste")
     private String surname;
 
-    private RoleCommand role;
-    private AddressCommand address;
+    @Pattern(regexp = ".+@.+\\.[a-z]+")
+    @NotBlank(message = "Pole nie może być puste")
+    private String email;
+
+    private Long role;
+
+    private Long addressId;
+    @NotBlank(message = "Pole nie może być puste")
+    @Size(min = 3, max = 50,message = "Długość musi być w zakresie: <3;50>")
+    private String streetName;
+    @NotBlank(message = "Pole nie może być puste")
+    @Size(min = 1, max = 15,message = "Długość musi być w zakresie: <3;50>")
+    private String hoNumber;
+    private String apaNumber;
+    @NotBlank(message = "Pole nie może być puste")
+    @Pattern(regexp = "[0-9][0-9]-[0-9][0-9][0-9]", message = "Błędny typ danych")
+    private String postalCode;
+    @NotBlank(message = "Pole nie może być puste")
+    @Size(min = 3, max = 50,message = "Długość musi być w zakresie: <3;50>")
+    private String city;
 
 
 
