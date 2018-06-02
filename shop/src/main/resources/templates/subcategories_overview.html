@@ -75,16 +75,16 @@
                             <tr th:each="subcategory : ${subcategories}">
                                 <td th:text="${subcategory.name}">Tasty Goodnees 3</td>
                                 <td th:text="${subcategory.description}">lol</td>
-                                <td th:text="${subcategory.category.name}"></td>
-                                <td><a href="#" th:href="@{'/categories/'+${category.id}+'/update'}">Edytuj</a> </td>
-                                <td><a href="#" th:href="@{'/categories/'+${category.id}+'/delete'}">Usuń</a> </td>
+                                <td th:text="${subcategory.category.name}">lol</td>
+                                <td><a href="#" th:href="@{'/subcategories/'+${subcategory.id}+'/update'}">Edytuj</a> </td>
+                                <td><a href="#" th:href="@{'/subcategories/'+${subcategory.id}+'/delete'}">Usuń</a> </td>
                             </tr>
                         </table>
                     </div>
                 </div>
                 <div class="panel-footer">
                     <a class="btn btn-default" href="#"
-                       th:href="@{'/categories/new'}" role="button">Nowy</a>
+                       th:href="@{'/subcategories/new'}" role="button">Nowy</a>
                 </div>
             </div>
         </div>

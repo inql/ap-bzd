@@ -58,7 +58,7 @@ public class SubcategoryServiceImpl implements SubcategoryService {
 
     @Override
     @Transactional
-    public SubcategoryCommand saveUserCommand(SubcategoryCommand subcategoryCommand) {
+    public SubcategoryCommand saveSubcategoryCommand(SubcategoryCommand subcategoryCommand) {
         Subcategory detachedSubcategory = subcategoryCommandToSubcategory.convert(subcategoryCommand);
 
         Subcategory savedSubcategory = subcategoryRepository.save(detachedSubcategory);

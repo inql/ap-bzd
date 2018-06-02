@@ -10,7 +10,7 @@ public interface SubcategoryService {
     Set<Subcategory> getSubcategories();
     Subcategory findById(Long l);
     SubcategoryCommand findCommandById(Long l);
-    SubcategoryCommand saveUserCommand(SubcategoryCommand subcategoryCommand);
+    SubcategoryCommand saveSubcategoryCommand(SubcategoryCommand subcategoryCommand);
     void deleteById(Long l);
 
 }

@@ -2,8 +2,10 @@ package inql.apbzd.shop.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import javax.validation.constraints.Null;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,6 +29,7 @@ public class Subcategory {
     private Set<Product> products = new HashSet<>();
 
     @Lob
+    @Null
     @Column(name = "obrazek")
     private Byte[] image;
 
