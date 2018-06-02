@@ -78,7 +78,8 @@ CREATE TABLE `podkategoria` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `kategoria_id` bigint(20) UNSIGNED NOT NULL,
   `nazwa` varchar(50) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
-  `opis` text CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL
+  `opis` text CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
+  `obrazek` blob
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 ALTER TABLE `podkategoria`
@@ -105,7 +106,9 @@ ALTER TABLE `produkt`
 CREATE TABLE `zamowienie` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `uzytkownik_id` bigint(20) UNSIGNED NOT NULL,
-  `data` date NOT NULL
+  `data_zlozenia` date NOT NULL,
+  `data_wysylki` date DEFAULT NULL,
+  `czy_oplacone` BIT(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 ALTER TABLE `zamowienie`
@@ -168,8 +171,8 @@ INSERT INTO `produkt` (nazwa, opis, podkategoria_id, cena) VALUES
   ('Poradnik dobrej żony','Książka napisana przez autora Łukasza Stanisławowskiego, autora takich książek jak "Pomarańcza"!',3,21.37),
   ('Pilot do znajdowania kluczy','Dzięki temu gadżetowi już nigdy nie zgubisz kluczy!',4,11.11);
 
-INSERT INTO `zamowienie` (uzytkownik_id, `data`) VALUES
-  (2, '2018-3-02');
+INSERT INTO `zamowienie` (uzytkownik_id, `data_zlozenia`,`data_wysylki`,`czy_oplacone`) VALUES
+  (1, '2018-3-02',NULL,0);
 
 INSERT INTO `koszyk` (zamowienie_id, produkt_id, ilosc) VALUES
   (1,1,1),

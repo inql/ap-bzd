@@ -23,8 +23,14 @@ public class Order {
     @JoinColumn(name = "uzytkownik_id")
     private User user;
 
-    @Column(name = "data")
-    private LocalDate date;
+    @Column(name = "data_zlozenia")
+    private LocalDate orderDate;
+
+    @Column(name = "data_wysylki")
+    private LocalDate shipDate;
+
+    @Column(name = "czy_oplacone")
+    private boolean isPaid;
 
     @OneToMany(mappedBy = "order")
     private Set<Cart> cartSet = new HashSet<>();

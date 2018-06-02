@@ -26,6 +26,10 @@ public class Subcategory {
     @OneToMany(mappedBy = "subcategory", cascade = CascadeType.ALL)
     private Set<Product> products = new HashSet<>();
 
+    @Lob
+    @Column(name = "obrazek")
+    private Byte[] image;
+
     @Override
     public String toString() {
         return name;
