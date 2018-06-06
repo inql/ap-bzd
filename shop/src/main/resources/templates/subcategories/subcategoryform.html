@@ -43,10 +43,10 @@
 <!--/*@thymesVar id="subcategory" type="inql.apbzd.shop.commands.SubcategoryCommand"*/-->
 <!--/*@thymesVar id="categories" type="java.util.List"*/-->
 <!--/*@thymesVar id="selectedCategory" type="inql.apbzd.shop.domain.Category"*/-->
-<div class=inql.apbzd.shop.domain.Address"container-fluid" style="margin-top: 20px">
+<div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <form th:object="${subcategory}" th:action="@{/subcategories/}" method="post">
+            <form th:object="${subcategory}" th:action="@{/subcategories/}" method="post" enctype="multipart/form-data">
 
                 <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
                     <p>Proszę wypełnij poniższe pola:</p>
@@ -59,6 +59,13 @@
                             <h1 class="panel-title">Informacje o podkategorii</h1>
                         </div>
                         <div class="panel-body">
+                            <div class="col-md-6">
+                                <img src=""
+                                     th:src="@{'/subcategories/' + ${subcategory.id} + '/subcategoryimage'}"
+                                     width="200" height="200">
+                            </div>
+                            <label class="control-label">Select File</label>
+                            <input id="imagefile" name="imagefile" type="file" class="file">
                             <div class="row">
                                 <div class="col-md-12 form-group" th:class="${#fields.hasErrors('name')}
                                 ? 'col-md-12 form-group has-error' : 'col-md-12 form-group'">

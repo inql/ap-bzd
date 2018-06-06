@@ -62,6 +62,7 @@ public class SubcategoryServiceImpl implements SubcategoryService {
         Subcategory detachedSubcategory = subcategoryCommandToSubcategory.convert(subcategoryCommand);
 
         Subcategory savedSubcategory = subcategoryRepository.save(detachedSubcategory);
+
         return subcategoryToSubcategoryCommand.convert(savedSubcategory);
     }
 

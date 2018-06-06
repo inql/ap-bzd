@@ -29,7 +29,6 @@ public class Subcategory {
     private Set<Product> products = new HashSet<>();
 
     @Lob
-    @Null
     @Column(name = "obrazek")
     private Byte[] image;
 
