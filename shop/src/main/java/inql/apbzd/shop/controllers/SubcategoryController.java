@@ -64,4 +64,12 @@ public class SubcategoryController {
         return "redirect:/";
 
     }
+
+    @GetMapping("subcategories/{id}/delete")
+    public String deleteById(@PathVariable String id){
+        log.debug("Deleting id: "+id);
+
+        subcategoryService.deleteById(Long.valueOf(id));
+        return "redirect:/";
+    }
 }
