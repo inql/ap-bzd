@@ -3,9 +3,11 @@ package inql.apbzd.shop.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,13 +26,15 @@ public class Order {
     private User user;
 
     @Column(name = "data_zlozenia")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate orderDate;
 
     @Column(name = "data_wysylki")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate shipDate;
 
     @Column(name = "czy_oplacone")
-    private boolean isPaid;
+    private Boolean isPaid;
 
     @OneToMany(mappedBy = "order")
     private Set<Cart> cartSet = new HashSet<>();
