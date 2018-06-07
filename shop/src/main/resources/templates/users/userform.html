@@ -118,6 +118,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
+                                    <label>Wybierz rolę</label>
                                     <select id="role" th:field="*{role}">
                                         <option th:each="selectedRole : ${roles}"
                                                 th:value="${selectedRole.id}"

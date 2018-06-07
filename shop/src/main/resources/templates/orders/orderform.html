@@ -88,6 +88,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
+                                    <label>Wybierz użytkownika:</label>
                                     <select id="user" th:field="*{user}">
                                         <option th:each="selectedUser : ${users}"
                                                 th:value="${selectedUser.id}"

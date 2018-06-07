@@ -56,12 +56,13 @@
                             <h1 class="panel-title">Informacje o podkategorii</h1>
                         </div>
                         <div class="panel-body">
-                            <div class="col-md-6">
+                            <div class="row">
+                            <div class="col-md-12 form-group">
                                 <img src=""
                                      th:src="@{'/subcategories/' + ${subcategory.id} + '/subcategoryimage'}"
                                      width="200" height="200" alt="Brak obrazka">
                             </div>
-                            <label class="control-label">Select File</label>
+                                </div>
                             <input id="imagefile" name="imagefile" type="file" class="file">
                             <div class="row">
                                 <div class="col-md-12 form-group" th:class="${#fields.hasErrors('name')}
@@ -89,6 +90,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
+                                    <label>Wybierz kategorię</label>
                                     <select id="role" th:field="*{category}">
                                         <option th:each="selectedCategory : ${categories}"
                                                 th:value="${selectedCategory.id}"

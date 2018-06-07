@@ -93,6 +93,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
+                                    <label>Wybierz podkategorię</label>
                                     <select id="role" th:field="*{subcategory}">
                                         <option th:each="selectedSubcategory : ${subcategories}"
                                                 th:value="${selectedSubcategory.id}"
