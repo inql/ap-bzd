@@ -5,7 +5,9 @@ import lombok.Setter;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,10 +20,16 @@ public class Subcategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OrderColumn
     @Column(name = "nazwa")
+    @Size(min = 3,max = 25)
+    @NotNull
     private String name;
+
     @Column(name = "opis", columnDefinition = "TEXT")
     private String description;
+
     @ManyToOne
     @JoinColumn(name = "kategoria_id")
     private Category category;

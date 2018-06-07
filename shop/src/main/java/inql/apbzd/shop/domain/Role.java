@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,7 +20,11 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OrderColumn
     @Column(name = "nazwa")
+    @NotNull
+    @Size(min = 3,max = 255)
     private String name;
     @Column(name = "opis", columnDefinition = "TEXT")
     @NotNull

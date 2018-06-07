@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Getter
@@ -22,6 +25,9 @@ public class Cart{
     @JoinColumn(name = "produkt_id")
     Product product;
     @Column(name = "ilosc")
+    @Min(1)
+    @Max(999)
+    @NotNull
     private int quantity;
 
 
