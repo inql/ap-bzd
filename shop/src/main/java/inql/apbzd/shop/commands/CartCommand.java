@@ -15,8 +15,8 @@ public class CartCommand {
     private Long orderId;
     private Long productId;
 
-    @Min(1)
-    @Max(999)
+    @Min(value = 1, message = "Za mała wartość")
+    @Max(value = 999, message = "Za duża wartość")
     private int quantity;
 
 

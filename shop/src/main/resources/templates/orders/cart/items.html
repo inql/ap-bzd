@@ -55,7 +55,8 @@
                                 <th>Przedmiot</th>
                                 <th>Opis przedmiotu</th>
                                 <th>Ilość</th>
-                                <th>Cena</th>
+                                <th>Cena za szt.</th>
+                                <th>Cena razem</th>
                                 <th>Wyświetl</th>
                                 <th>Edytuj</th>
                                 <th>Usuń</th>
@@ -75,6 +76,7 @@
                                 <td th:text="${(cart.product.name)}">Tasty Goodnees 3</td>
                                 <td th:text="${cart.product.description}"></td>
                                 <td th:text="${cart.quantity}">lol</td>
+                                <td th:text="${cart.product.price}+ ' zł'">test</td>
                                 <div th:with="sum = ${cart.product.price}*${cart.quantity}"><td th:text="${sum}+ ' zł'"></td></div>
                                 <td><a href="#" th:href="@{'/orders/'+${order.id}+'/cart/'+${cart.product.id}+'/show'}">Wyświetl</a> </td>
                                 <td><a href="#" th:href="@{'/orders/'+${order.id}+'/cart/'+${cart.product.id}+'/update'}">Edytuj</a> </td>

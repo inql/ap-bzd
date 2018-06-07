@@ -74,7 +74,7 @@
                                 <td th:text="${product.name}">Tasty Goodnees 3</td>
                                 <td th:text="${product.description}">lol</td>
                                 <td th:text="${product.subcategory.name}">lol</td>
-                                <td th:text="${product.price}">lol</td>
+                                <td th:text="${product.price}+ ' zł'">lol</td>
                                 <td><a href="#" th:href="@{'/products/'+${product.id}+'/show'}">Wyświetl</a> </td>
                                 <td><a href="#" th:href="@{'/products/'+${product.id}+'/update'}">Edytuj</a> </td>
                                 <td><a href="#" th:href="@{'/products/'+${product.id}+'/delete'}" onclick="return confirm('Czy na pewno chcesz usunąć?')">Usuń</a> </td>

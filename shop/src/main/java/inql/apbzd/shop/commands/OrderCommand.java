@@ -19,7 +19,7 @@ public class OrderCommand {
     private Long id;
     private Long user;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Past
+    @Past(message = "Błędna wartość")
     private LocalDate orderDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate shipDate;
