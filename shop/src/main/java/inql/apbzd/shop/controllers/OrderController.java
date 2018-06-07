@@ -25,10 +25,16 @@ public class OrderController {
         this.userService = userService;
     }
 
-    @RequestMapping("/orders_overview")
+    @RequestMapping("/orders/orders_overview")
     public String getOrdersPage(Model model){
         model.addAttribute("orders", orderService.getOrders());
-        return "orders_overview";
+        return "/orders/orders_overview";
+    }
+
+    @GetMapping("/orders/{id}/show")
+    public String showOrder(@PathVariable String id, Model model){
+        model.addAttribute("order",orderService.findById(Long.valueOf(id)));
+        return "orders/show";
     }
 
     @GetMapping("/orders/new")
@@ -54,7 +60,7 @@ public class OrderController {
             return ORDERS_ORDERFORM_URL;
         }
         OrderCommand savedCommand = orderService.saveOrderCommand(orderCommand);
-        return "redirect:/";
+        return "redirect:/orders/orders_overview";
     }
 
     @GetMapping("orders/{id}/delete")
@@ -62,7 +68,7 @@ public class OrderController {
         log.debug("Deleting id: "+id);
 
         orderService.deleteById(Long.valueOf(id));
-        return "redirect:/";
+        return "redirect:/orders/orders_overview";
     }
 
 

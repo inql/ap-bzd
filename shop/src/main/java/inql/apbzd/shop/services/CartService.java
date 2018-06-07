@@ -7,6 +7,7 @@ import java.util.Set;
 
 public interface CartService {
 
+    Cart getCartByOrderIdAndProductId(Long orderId, Long productId);
     CartCommand findByOrderIdAndProductId(Long orderId, Long productId);
     CartCommand saveCartCommand(CartCommand cartCommand);
     void deleteById(Long idToDelete, Long orderId);

@@ -29,10 +29,10 @@ public class SubcategoryController {
         this.imageService = imageService;
     }
 
-    @RequestMapping("/subcategories_overview")
+    @RequestMapping("/subcategories/subcategories_overview")
     public String getSubcategoriesPage(Model model){
         model.addAttribute("subcategories",subcategoryService.getSubcategories());
-        return "subcategories_overview";
+        return "/subcategories/subcategories_overview";
     }
 
     @GetMapping("subcategories/new")
@@ -51,6 +51,12 @@ public class SubcategoryController {
         return SUBCATEGORY_SUBCATEGORYFORM_URL;
     }
 
+    @GetMapping("/subcategories/{id}/show")
+    public String showSubcategory(@PathVariable String id, Model model){
+        model.addAttribute("subcategory",subcategoryService.findById(Long.valueOf(id)));
+        return "subcategories/show";
+    }
+
     @PostMapping("subcategories")
     public String saveOrUpdate(@Valid @ModelAttribute("subcategory") SubcategoryCommand subcategoryCommand, BindingResult bindingResult, @RequestParam("imagefile") MultipartFile file, Model model){
         if(bindingResult.hasErrors()){
@@ -61,7 +67,7 @@ public class SubcategoryController {
         SubcategoryCommand savedCommand = subcategoryService.saveSubcategoryCommand(subcategoryCommand);
         imageService.saveImageFile(savedCommand.getId(),file);
 
-        return "redirect:/";
+        return "redirect:/subcategories/subcategories_overview";
 
     }
 
@@ -70,6 +76,6 @@ public class SubcategoryController {
         log.debug("Deleting id: "+id);
 
         subcategoryService.deleteById(Long.valueOf(id));
-        return "redirect:/";
+        return "redirect:/subcategories/subcategories_overview";
     }
 }

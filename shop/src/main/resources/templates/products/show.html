@@ -4,6 +4,7 @@
     <meta charset="UTF-8"/>
     <title>Sklep Internetowy</title>
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
+
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
@@ -29,33 +30,62 @@
                     <li class=""><a href="#" th:href="@{'/categories/categories_overview'}">Kategorie</a></li>
                     <li class=""><a href="#" th:href="@{'/subcategories/subcategories_overview'}">Podkategorie</a></li>
                     <li class=""><a href="#" th:href="@{'/roles/roles_overview'}">Role</a></li>
-                    <li class=""><a href="#" th:href="@{'/products/products_overview'}">Produkty</a></li>
+                    <li class="active"><a href="#" th:href="@{'/products/products_overview'}">Produkty</a></li>
                     <li class=""><a href="#" th:href="@{'/orders/orders_overview'}">Zamówienia</a></li>
                 </ul>
             </ul>
         </div>
     </div>
 </nav>
-
-<div class="container-fluid text-center">
-    <div class="row content">
-        <div class="col-sm-2 sidenav">
-        </div>
-        <div class="col-sm-8 text-left">
-            <h1>Witaj</h1>
-            <p>Ta strona została przygotowana na potrzeby projektu z aplikacji bazodanowych</p>
-            <hr>
-        </div>
-        <div class="col-sm-2 sidenav">
+<!--/*@thymesVar id="product" type="inql.apbzd.shop.domain.Product"*/-->
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="pannel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Informacje o produkcie</h1>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Nazwa pola</th>
+                                <th>Wartość</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Nazwa</td>
+                                <td th:text="${product.name}">test:</td>
+                            </tr>
+                            <tr>
+                                <td>Opis</td>
+                                <td th:text="${product.description}">test</td>
+                            </tr>
+                            <tr>
+                                <td>Podkategoria</td>
+                                <td th:text="${product.subcategory.name}"></td>
+                            </tr>
+                            <tr>
+                                <td>Cena</td>
+                                <td th:text="${product.price}+' zł'"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
+</div>
+</div>
+</div>
 <footer class="footer">
     <div class="container">
         <span class="text-muted">Ⓒ 2018 Dawid Bińkuś</span>
     </div>
 </footer>
-
 </body>
 </html>

@@ -22,10 +22,16 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @RequestMapping({"/categories_overview"})
+    @RequestMapping({"/categories/categories_overview"})
     public String getRolePage(Model model){
         model.addAttribute("categories",categoryService.getCategories());
-        return "categories_overview";
+        return "/categories/categories_overview";
+    }
+
+    @GetMapping("/categories/{id}/show")
+    public String showCategory(@PathVariable String id, Model model){
+        model.addAttribute("category",categoryService.findCommandById(Long.valueOf(id)));
+        return "categories/show";
     }
 
     @GetMapping("categories/new")
@@ -52,13 +58,13 @@ public class CategoryController {
 
         CategoryCommand savedCommand = categoryService.saveCategoryCommand(categoryCommand);
 
-        return "redirect:/";
+        return "redirect:/categories/categories_overview";
     }
 
     @GetMapping("categories/{id}/delete")
     public String deleteById(@PathVariable String id){
         log.debug("Deleting ID: "+id);
         categoryService.deleteById(Long.valueOf(id));
-        return "redirect:/";
+        return "redirect:/categories/categories_overview";
     }
 }

@@ -29,10 +29,10 @@ public class UserController {
         this.addressService = addressService;
     }
 
-    @RequestMapping("/users_overview")
+    @RequestMapping("/users/users_overview")
     public String getUsersPage(Model model){
         model.addAttribute("users",userService.getUsers());
-        return "users_overview";
+        return "/users/users_overview";
     }
 
     @GetMapping("users/new")
@@ -51,6 +51,12 @@ public class UserController {
         return USER_USERFORM_URL;
     }
 
+    @GetMapping("/users/{id}/show")
+    public String showSubcategory(@PathVariable String id, Model model){
+        model.addAttribute("user",userService.findById(Long.valueOf(id)));
+        return "users/show";
+    }
+
     @PostMapping("users")
     public String saveOrUpdate(@Valid @ModelAttribute("user") UserCommand userCommand, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()){
@@ -60,7 +66,7 @@ public class UserController {
         }
         UserCommand savedCommand = userService.saveUserCommand(userCommand);
 
-        return "redirect:/";
+        return "redirect:/users/users_overview";
 
     }
 
@@ -71,6 +77,6 @@ public class UserController {
         Long addressId = userService.findById(Long.valueOf(id)).getAddress().getId();
         userService.deleteById(Long.valueOf(id));
         addressService.deleteById(addressId);
-        return "redirect:/";
+        return "redirect:/users/users_overview";
     }
 }

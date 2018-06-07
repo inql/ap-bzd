@@ -25,10 +25,16 @@ public class ProductController {
         this.subcategoryService = subcategoryService;
     }
 
-    @RequestMapping("/products_overview")
+    @RequestMapping("/products/products_overview")
     public String getProductsPage(Model model){
         model.addAttribute("products",productService.getProducts());
-        return "products_overview";
+        return "/products/products_overview";
+    }
+
+    @GetMapping("/products/{id}/show")
+    public String showOrder(@PathVariable String id, Model model){
+        model.addAttribute("product",productService.findById(Long.valueOf(id)));
+        return "products/show";
     }
 
     @GetMapping("/products/new")
@@ -54,7 +60,7 @@ public class ProductController {
             return PRODUCTS_PRODUCTFORM_URL;
         }
         ProductCommand savedCommand = productService.saveProductCommand(productCommand);
-        return "redirect:/";
+        return "redirect:/products/products_overview";
     }
 
     @GetMapping("products/{id}/delete")
@@ -62,6 +68,6 @@ public class ProductController {
         log.debug("Deleting id: "+id);
 
         productService.deleteById(Long.valueOf(id));
-        return "redirect:/";
+        return "redirect:/products/products_overview";
     }
 }

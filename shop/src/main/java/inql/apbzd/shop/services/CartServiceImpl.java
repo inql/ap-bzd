@@ -50,6 +50,11 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public Cart getCartByOrderIdAndProductId(Long orderId, Long productId){
+        return cartCommandToCart.convert(findByOrderIdAndProductId(orderId,productId));
+    }
+
+    @Override
     @Transactional
     public CartCommand saveCartCommand(CartCommand cartCommand) {
         Cart detachedCart = cartCommandToCart.convert(cartCommand);

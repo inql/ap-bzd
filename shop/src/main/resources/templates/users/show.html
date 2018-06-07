@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Sklep Internetowy</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
+
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#" th:href="@{'/'}">Strona główna</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#" th:href="@{'/users/users_overview'}">Użytkownicy</a></li>
+                    <li class=""><a href="#" th:href="@{'/categories/categories_overview'}">Kategorie</a></li>
+                    <li class=""><a href="#" th:href="@{'/subcategories/subcategories_overview'}">Podkategorie</a></li>
+                    <li class=""><a href="#" th:href="@{'/roles/roles_overview'}">Role</a></li>
+                    <li class=""><a href="#" th:href="@{'/products/products_overview'}">Produkty</a></li>
+                    <li class=""><a href="#" th:href="@{'/orders/orders_overview'}">Zamówienia</a></li>
+                </ul>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--/*@thymesVar id="user" type="inql.apbzd.shop.domain.User"*/-->
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="pannel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Informacje o użytkowniku</h1>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Nazwa pola</th>
+                                <th>Wartość</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Login</td>
+                                <td th:text="${user.login}">test:</td>
+                            </tr>
+                            <tr>
+                                <td>Imie</td>
+                                <td th:text="${user.name}">test</td>
+                            </tr>
+                            <tr>
+                                <td>Nazwisko</td>
+                                <td th:text="${user.surname}">test</td>
+                            </tr>
+                            <tr>
+                                <td>Rola</td>
+                                <td th:text="${user.role.name}">test</td>
+                            </tr>
+                            <tr>
+                                <td>Adres email</td>
+                                <td th:text="${user.email}">test</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Dane adresowe</h1>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Nazwa pola</th>
+                                <th>Wartość</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Ulica</td>
+                                <td th:text="${user.address.streetName}">test:</td>
+                            </tr>
+                            <tr>
+                                <td>Nr. domu</td>
+                                <td th:text="${user.address.hoNumber}">test</td>
+                            </tr>
+                            <tr>
+                                <td>Nr. mieszkania</td>
+                                <td th:text="${user.address.apaNumber}">test</td>
+                            </tr>
+                            <tr>
+                                <td>Kod pocztowy</td>
+                                <td th:text="${user.address.postalCode}">test</td>
+                            </tr>
+                            <tr>
+                                <td>Miasto</td>
+                                <td th:text="${user.address.city}">test</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+<footer class="footer">
+    <div class="container">
+        <span class="text-muted">Ⓒ 2018 Dawid Bińkuś</span>
+    </div>
+</footer>
+</body>
+</html>

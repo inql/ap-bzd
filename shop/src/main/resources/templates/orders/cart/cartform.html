@@ -2,8 +2,8 @@
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Recipe Home</title>
-
+    <title>Sklep Internetowy</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
@@ -20,22 +20,18 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Portfolio</a>
+            <a class="navbar-brand" href="#" th:href="@{'/'}">Strona główna</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="index">Home</a></li>
-                <li><a href="roles_overview">Role</a></li>
-                <li><a href="#">Gallery</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <ul class="nav navbar-nav">
+                    <li class=""><a href="#" th:href="@{'/users/users_overview'}">Użytkownicy</a></li>
+                    <li class=""><a href="#" th:href="@{'/categories/categories_overview'}">Kategorie</a></li>
+                    <li class=""><a href="#" th:href="@{'/subcategories/subcategories_overview'}">Podkategorie</a></li>
+                    <li class=""><a href="#" th:href="@{'/roles/roles_overview'}">Role</a></li>
+                    <li class=""><a href="#" th:href="@{'/products/products_overview'}">Produkty</a></li>
+                    <li class="active"><a href="#" th:href="@{'/orders/orders_overview'}">Zamówienia</a></li>
+                </ul>
             </ul>
         </div>
     </div>
@@ -60,7 +56,7 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <select id="role" th:field="*{productId}">
+                                    <select id="selectedProduct" th:field="*{productId}">
                                         <option th:each="selectedProduct : ${products}"
                                                 th:value="${selectedProduct.id}"
                                                 th:text="${selectedProduct.name}">
@@ -94,5 +90,10 @@
 </div>
 </div>
 </div>
+<footer class="footer">
+    <div class="container">
+        <span class="text-muted">Ⓒ 2018 Dawid Bińkuś</span>
+    </div>
+</footer>
 </body>
 </html>

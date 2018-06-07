@@ -4,7 +4,6 @@
     <meta charset="UTF-8"/>
     <title>Sklep Internetowy</title>
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
-
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
@@ -37,59 +36,57 @@
         </div>
     </div>
 </nav>
-<!--/*@thymesVar id="carts" type="java.util.Set<inql.apbzd.shop.domain.Cart>"*/-->
 <!--/*@thymesVar id="order" type="inql.apbzd.shop.domain.Order"*/-->
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <div class="panel panel-primary">
-
-                <div class="panel-heading">
-                    <h1 class="panel-title">Przedmioty w koszyku:</h1>
-                </div>
-                <div class="panel-body">
-                    <div class="table-responsive" th:if="${not #lists.isEmpty(order.cartSet)}">
-                        <table class="table table-hover ">
-                            <thead class="thead-inverse">
+            <div class="pannel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Informacje o zamówieniu</h1>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
                             <tr>
-                                <th>Przedmiot</th>
-                                <th>Opis przedmiotu</th>
-                                <th>Ilość</th>
-                                <th>Cena</th>
-                                <th>Wyświetl</th>
-                                <th>Edytuj</th>
-                                <th>Usuń</th>
+                                <th>Nazwa pola</th>
+                                <th>Wartość</th>
                             </tr>
                             </thead>
-                            <tr th:remove="all">
-                                <td>123</td>
-                                <td>Tasty Goodnees 1</td>
-                                <td><a href="#">View</a></td>
+                            <tbody>
+                            <tr>
+                                <td>Zamawiający</td>
+                                <td th:text="${order.user.name}+' '+${order.user.surname}">test:</td>
                             </tr>
-                            <tr th:remove="all">
-                                <td>12333</td>
-                                <td>Tasty Goodnees 2</td>
-                                <td><a href="#">View</a></td>
+                            <tr>
+                                <td>Nick</td>
+                                <td th:text="${order.user.login}">test</td>
                             </tr>
-                            <tr th:each="cart : ${order.cartSet}">
-                                <td th:text="${(cart.product.name)}">Tasty Goodnees 3</td>
-                                <td th:text="${cart.product.description}"></td>
-                                <td th:text="${cart.quantity}">lol</td>
-                                <div th:with="sum = ${cart.product.price}*${cart.quantity}"><td th:text="${sum}+ ' zł'"></td></div>
-                                <td><a href="#" th:href="@{'/orders/'+${order.id}+'/cart/'+${cart.product.id}+'/show'}">Wyświetl</a> </td>
-                                <td><a href="#" th:href="@{'/orders/'+${order.id}+'/cart/'+${cart.product.id}+'/update'}">Edytuj</a> </td>
-                                <td><a href="#" th:href="@{'/orders/'+${order.id}+'/cart/'+${cart.product.id}+'/delete'}" onclick="return confirm('Czy na pewno chcesz usunąć?')">Usuń</a> </td>
+                            <tr>
+                                <td>Data złożenia</td>
+                                <td th:text="${order.orderDate}">lol</td>
                             </tr>
+                            <tr>
+                                <td>Data wysyłki</td>
+                                <td th:text="${order.shipDate != null} ? ${order.shipDate} : 'Nie podano'">lol</td>
+                            </tr>
+                            <tr>
+                                <td>Status zamówienia</td>
+                                <div th:switch="${order.isPaid}">
+                                    <td th:case="${true}">Opłacono</td>
+                                    <td th:case="${false}">Nie opłacono</td>
+                                </div>
+                            </tr>
+                            </tbody>
                         </table>
                     </div>
-                </div>
-                <div class="panel-footer">
-                    <a class="btn btn-default" href="#"
-                       th:href="@{'/orders/'+${order.id}+'/cart/new'}" role="button">Nowy</a>
                 </div>
             </div>
         </div>
     </div>
+</div>
+</div>
+</div>
 </div>
 <footer class="footer">
     <div class="container">

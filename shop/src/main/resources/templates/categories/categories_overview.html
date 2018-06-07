@@ -2,7 +2,8 @@
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Recipe Home</title>
+    <title>Sklep Internetowy</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -20,44 +21,40 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Portfolio</a>
+            <a class="navbar-brand" href="#" th:href="@{'/'}">Strona główna</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="index">Home</a></li>
-                <li><a href="roles_overview">Role</a></li>
-                <li><a href="#">Gallery</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <ul class="nav navbar-nav">
+                    <li class=""><a href="#" th:href="@{'/users/users_overview'}">Użytkownicy</a></li>
+                    <li class="active"><a href="#" th:href="@{'/categories/categories_overview'}">Kategorie</a></li>
+                    <li class=""><a href="#" th:href="@{'/subcategories/subcategories_overview'}">Podkategorie</a></li>
+                    <li class=""><a href="#" th:href="@{'/roles/roles_overview'}">Role</a></li>
+                    <li class=""><a href="#" th:href="@{'/products/products_overview'}">Produkty</a></li>
+                    <li class=""><a href="#" th:href="@{'/orders/orders_overview'}">Zamówienia</a></li>
+                </ul>
             </ul>
         </div>
     </div>
 </nav>
-<!--/*@thymesVar id="subcategories" type="java.util.List"*/-->
-<!--/*@thymesVar id="subcategory" type="inql.apbzd.shop.domain.Subcategory"*/-->
+<!--/*@thymesVar id="categories" type="java.util.List"*/-->
+<!--/*@thymesVar id="category" type="inql.apbzd.shop.domain.Category"*/-->
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-12">
             <div class="panel panel-primary">
 
                 <div class="panel-heading">
-                    <h1 class="panel-title">Podkategorie</h1>
+                    <h1 class="panel-title">Kategorie</h1>
                 </div>
                 <div class="panel-body">
-                    <div class="table-responsive" th:if="${not #lists.isEmpty(subcategories)}">
+                    <div class="table-responsive" th:if="${not #lists.isEmpty(categories)}">
                         <table class="table table-hover ">
                             <thead class="thead-inverse">
                             <tr>
                                 <th>Nazwa</th>
                                 <th>Opis</th>
-                                <th>Nazwa kategorii</th>
+                                <th>Wyświetl</th>
                                 <th>Edytuj</th>
                                 <th>Usuń</th>
                             </tr>
@@ -72,24 +69,28 @@
                                 <td>Tasty Goodnees 2</td>
                                 <td><a href="#">View</a></td>
                             </tr>
-                            <tr th:each="subcategory : ${subcategories}">
-                                <td th:text="${subcategory.name}">Tasty Goodnees 3</td>
-                                <td th:text="${subcategory.description}">lol</td>
-                                <td th:text="${subcategory.category.name}">lol</td>
-                                <td><a href="#" th:href="@{'/subcategories/'+${subcategory.id}+'/update'}">Edytuj</a> </td>
-                                <td><a href="#" th:href="@{'/subcategories/'+${subcategory.id}+'/delete'}">Usuń</a> </td>
+                            <tr th:each="category : ${categories}">
+                                <td th:text="${category.name}">Tasty Goodnees 3</td>
+                                <td th:text="${category.description}">lol</td>
+                                <td><a href="#" th:href="@{'/categories/'+${category.id}+'/show'}">Wyświetl</a> </td>
+                                <td><a href="#" th:href="@{'/categories/'+${category.id}+'/update'}">Edytuj</a> </td>
+                                <td><a href="#" th:href="@{'/categories/'+${category.id}+'/delete'}" onclick="return confirm('Czy na pewno chcesz usunąć?')">Usuń</a> </td>
                             </tr>
                         </table>
                     </div>
                 </div>
                 <div class="panel-footer">
                     <a class="btn btn-default" href="#"
-                       th:href="@{'/subcategories/new'}" role="button">Nowy</a>
+                       th:href="@{'/categories/new'}" role="button">Nowy</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+<footer class="footer">
+    <div class="container">
+        <span class="text-muted">Ⓒ 2018 Dawid Bińkuś</span>
+    </div>
+</footer>
 </body>
 </html>

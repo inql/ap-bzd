@@ -23,10 +23,10 @@ public class RoleController {
         this.roleService = roleService;
     }
 
-    @RequestMapping({"/roles_overview"})
+    @RequestMapping({"/roles/roles_overview"})
     public String getRolePage(Model model){
         model.addAttribute("roles",roleService.getRoles());
-        return "roles_overview";
+        return "/roles/roles_overview";
     }
 
     @GetMapping("roles/new")
@@ -34,6 +34,12 @@ public class RoleController {
         model.addAttribute("role", new RoleCommand());
 
         return "roles/roleform";
+    }
+
+    @GetMapping("/roles/{id}/show")
+    public String showRole(@PathVariable String id, Model model){
+        model.addAttribute("role",roleService.findById(Long.valueOf(id)));
+        return "roles/show";
     }
 
     @GetMapping("roles/{id}/update")
@@ -55,7 +61,7 @@ public class RoleController {
 
         RoleCommand savedCommand = roleService.saveRoleCommand(roleCommand);
 
-        return "redirect:/";
+        return "redirect:/roles/roles_overview";
 
     }
 
@@ -64,7 +70,7 @@ public class RoleController {
         log.debug("Deleting id: "+id);
 
         roleService.deleteById(Long.valueOf(id));
-        return "redirect:/";
+        return "redirect:/roles/roles_overview";
     }
 
 }

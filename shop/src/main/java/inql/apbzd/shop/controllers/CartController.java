@@ -54,6 +54,12 @@ public class CartController {
         return "/orders/cart/cartform";
     }
 
+    @GetMapping("/orders/{orderId}/cart/{productId}/show")
+    public String showCart(@PathVariable String orderId, @PathVariable String productId, Model model){
+        model.addAttribute("cart",cartService.getCartByOrderIdAndProductId(Long.valueOf(orderId),Long.valueOf(productId)));
+        return "orders/cart/show";
+    }
+
     @PostMapping("carts")
     public String saveOrUpdate(@Valid @ModelAttribute("cart") CartCommand cartCommand, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()){
@@ -62,13 +68,13 @@ public class CartController {
             return "/orders/cart/cartform";
         }
         CartCommand savedCommand = cartService.saveCartCommand(cartCommand);
-        return "redirect:/";
+        return "redirect:/orders/"+savedCommand.getOrderId()+"/cart";
     }
 
     @GetMapping("/orders/{orderId}/cart/{productId}/delete")
     public String deleteById(@PathVariable String orderId, @PathVariable String productId){
 
         cartService.deleteById(Long.valueOf(productId),Long.valueOf(orderId));
-        return "redirect:/";
+        return "redirect:/orders/"+orderId+"/cart";
     }
 }
